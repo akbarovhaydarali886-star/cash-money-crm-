@@ -16,7 +16,8 @@ export const INITIAL_USER = {
   kartaMuddati: "08/28",
   maoshQabulQilingan: false,
   oxirgiMaoshSanasi: "2026-09-05",
-  keyingiMaoshSanasi: "2026-10-05"
+  keyingiMaoshSanasi: "2026-10-05",
+  isRegistered: false
 };
 
 export const INITIAL_HOME_SERVICES = {

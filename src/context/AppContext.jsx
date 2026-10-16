@@ -26,8 +26,17 @@ export const AppProvider = ({ children }) => {
   });
 
   const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    const saved = localStorage.getItem('hamyon_auth');
-    return saved ? JSON.parse(saved) : true;
+    const savedAuth = localStorage.getItem('hamyon_auth');
+    const savedUser = localStorage.getItem('hamyon_user');
+    if (savedAuth && savedUser) {
+      try {
+        const parsedUser = JSON.parse(savedUser);
+        return JSON.parse(savedAuth) === true && Boolean(parsedUser.isRegistered);
+      } catch (e) {
+        return false;
+      }
+    }
+    return false;
   });
 
   // Services
@@ -146,18 +155,24 @@ export const AppProvider = ({ children }) => {
   // Auth Functions
   const login = (identifier, pin) => {
     const cleanId = (identifier || '').replace(/\s+/g, '');
-    const cleanUserPhone = (user.telefon || '').replace(/\s+/g, '');
+    const cleanUserPhone = (user?.telefon || '').replace(/\s+/g, '');
+    const cleanJshshir = (user?.jshshir || '').replace(/\s+/g, '');
     
     if (
-      cleanId === cleanUserPhone || 
-      cleanId === (user.jshshir || '') || 
-      cleanId === "admin" || 
-      cleanId === "demo" ||
-      pin === user.pinCode
+      (cleanId && cleanId === cleanUserPhone && pin === user?.pinCode) ||
+      (cleanId && cleanId === cleanJshshir && pin === user?.pinCode) ||
+      (cleanId === "admin" && pin === "1234") ||
+      (cleanId === "demo" && pin === "1234") ||
+      (cleanId === "+998901234567" && pin === "1234") ||
+      (cleanId === "31204951234567" && pin === "1234")
     ) {
+      setUser(prev => ({
+        ...prev,
+        isRegistered: true
+      }));
       setIsAuthenticated(true);
       setIsAuthModalOpen(false);
-      showNotification(`Xush kelibsiz, ${user.ism}! Tizimga muvaffaqiyatli kirdingiz.`);
+      showNotification(`Xush kelibsiz, ${user?.ism || 'Foydalanuvchi'}! Tizimga muvaffaqiyatli kirdingiz.`);
       return { success: true };
     } else {
       return { success: false, error: "Telefon/JSHSHIR yoki maxfiy PIN kod noto'g'ri kiritildi." };
@@ -165,22 +180,43 @@ export const AppProvider = ({ children }) => {
   };
 
   const register = (newUserData) => {
+    const randomCardEnd = Math.floor(1000 + Math.random() * 9000);
+    const salary = Number(newUserData.oylikDaromad) || 15000000;
+    const initialBalance = Math.round(salary * 0.6);
+    const payDay = Number(newUserData.oylikKuni) || 5;
+
     const updated = {
       ...INITIAL_USER,
       ...newUserData,
-      balans: newUserData.balans || 5000000
+      oylikDaromad: salary,
+      oylikKuni: payDay,
+      balans: initialBalance,
+      kartaRaqam: `8600 •••• •••• ${randomCardEnd}`,
+      kartaMuddati: "10/29",
+      maoshQabulQilingan: false,
+      oxirgiMaoshSanasi: getCurrentDateTime().split(' ')[0],
+      keyingiMaoshSanasi: `2026-11-${String(payDay).padStart(2, '0')}`,
+      isRegistered: true
     };
     setUser(updated);
+    if (newUserData.ism) {
+      const fullName = `${newUserData.ism} ${newUserData.familiya || ''}`.trim();
+      setHomeServices(prev => ({
+        ...prev,
+        kamunal: (prev.kamunal || []).map(k => ({ ...k, abonentNomi: fullName }))
+      }));
+    }
     setIsAuthenticated(true);
     setIsAuthModalOpen(false);
-    showNotification(`Tabriklaymiz, ${updated.ism}! Siz muvaffaqiyatli ro'yxatdan o'tdingiz.`);
-    confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
+    showNotification(`Tabriklaymiz, ${updated.ism}! Siz muvaffaqiyatli ro'yxatdan o'tdingiz va hamyoningiz ochildi.`);
+    confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
     return { success: true };
   };
 
   const logout = () => {
     setIsAuthenticated(false);
-    setIsAuthModalOpen(true);
+    localStorage.setItem('hamyon_auth', 'false');
+    setIsAuthModalOpen(false);
     setAuthMode('login');
     showNotification("Tizimdan chiqdingiz.", "info");
   };

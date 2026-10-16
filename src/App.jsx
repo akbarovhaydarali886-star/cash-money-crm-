@@ -9,6 +9,7 @@ import ServicesMenuModal from './components/ServicesMenuModal';
 import ContactsModal from './components/ContactsModal';
 import AddCarModal from './components/AddCarModal';
 import AddHomeModal from './components/AddHomeModal';
+import AuthGate from './components/AuthGate';
 
 import DashboardPage from './pages/DashboardPage';
 import HomeServicesPage from './pages/HomeServicesPage';
@@ -31,7 +32,7 @@ import {
 } from 'lucide-react';
 
 const MainLayout = () => {
-  const { activePage, setActivePage, alertNotification } = useApp();
+  const { activePage, setActivePage, alertNotification, isAuthenticated } = useApp();
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 transition-colors duration-200">
@@ -39,29 +40,35 @@ const MainLayout = () => {
       {/* Top Navigation */}
       <Navbar />
 
-      {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-5 pb-24 lg:pb-10">
-        <div className="flex flex-col lg:flex-row gap-5">
-          
-          {/* Left Sidebar */}
-          <Sidebar />
+      {/* Agar foydalanuvchi ro'yxatdan o'tmagan bo'lsa - faqat Ro'yxatdan o'tish / Kirish oynasi ko'rinadi */}
+      {!isAuthenticated ? (
+        <AuthGate />
+      ) : (
+        /* Ro'yxatdan o'tgandan so'ng barcha shaxsiy ma'lumotlar, profilingiz va xizmatlar ochiladi */
+        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-5 pb-24 lg:pb-10">
+          <div className="flex flex-col lg:flex-row gap-5">
+            
+            {/* Left Sidebar */}
+            <Sidebar />
 
-          {/* Page Dynamic Content */}
-          <div className="flex-1 min-w-0">
-            {activePage === 'dashboard' && <DashboardPage />}
-            {activePage === 'home' && <HomeServicesPage />}
-            {activePage === 'car' && <CarServicesPage />}
-            {activePage === 'family' && <FamilyServicesPage />}
-            {activePage === 'business' && <BusinessServicesPage />}
-            {activePage === 'receipts' && <ReceiptsPage />}
-            {activePage === 'contacts' && <ContactsPage />}
+            {/* Page Dynamic Content */}
+            <div className="flex-1 min-w-0">
+              {activePage === 'dashboard' && <DashboardPage />}
+              {activePage === 'home' && <HomeServicesPage />}
+              {activePage === 'car' && <CarServicesPage />}
+              {activePage === 'family' && <FamilyServicesPage />}
+              {activePage === 'business' && <BusinessServicesPage />}
+              {activePage === 'receipts' && <ReceiptsPage />}
+              {activePage === 'contacts' && <ContactsPage />}
+            </div>
+
           </div>
+        </main>
+      )}
 
-        </div>
-      </main>
-
-      {/* Mobile Bottom Quick Navigation */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 p-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800">
+      {/* Mobile Bottom Quick Navigation (Faqat ro'yxatdan o'tgach ko'rinadi) */}
+      {isAuthenticated && (
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 p-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800">
         <div className="mx-auto max-w-md px-2 flex items-center justify-around">
           <button
             onClick={() => setActivePage('dashboard')}
@@ -124,6 +131,7 @@ const MainLayout = () => {
           </button>
         </div>
       </div>
+      )}
 
       {/* Global Toast Alert Notification */}
       {alertNotification && (
