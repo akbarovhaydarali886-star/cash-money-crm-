@@ -84,8 +84,8 @@ const HomeServicesPage = () => {
     <div className="space-y-5 animate-in fade-in duration-200">
       
       {/* Properties Switcher Row */}
-      <div className="clean-card p-3 sm:p-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 max-w-full">
+      <div className="clean-card p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0 max-w-full">
           <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1.5 flex-shrink-0">
             <Home className="w-4 h-4 text-amber-500" />
             Mening ko'chmas mulklarim ({uylar.length}):
@@ -117,7 +117,7 @@ const HomeServicesPage = () => {
 
         <button
           onClick={() => setIsAddHomeModalOpen(true)}
-          className="clean-btn px-3.5 py-2 flex items-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400 hover:border-amber-500 flex-shrink-0 ml-auto"
+          className="clean-btn px-3.5 py-2 flex items-center justify-center gap-1.5 text-xs font-bold text-amber-600 dark:text-amber-400 hover:border-amber-500 w-full sm:w-auto flex-shrink-0"
         >
           <Plus className="w-4 h-4" />
           <span>+ Yangi uy qo'shish</span>
@@ -145,10 +145,10 @@ const HomeServicesPage = () => {
         </div>
 
         {/* Tab switch */}
-        <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl">
+        <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl overflow-x-auto no-scrollbar w-full md:w-auto">
           <button
             onClick={() => setActiveTab('kamunal')}
-            className={`py-1.5 px-3 text-xs font-bold rounded-lg transition-all ${
+            className={`py-1.5 px-3 text-xs font-bold rounded-lg transition-all shrink-0 text-center whitespace-nowrap ${
               activeTab === 'kamunal' ? 'bg-white dark:bg-slate-900 text-sky-600 dark:text-sky-400 shadow-sm' : 'text-slate-600 dark:text-slate-400'
             }`}
           >
@@ -156,7 +156,7 @@ const HomeServicesPage = () => {
           </button>
           <button
             onClick={() => setActiveTab('soliqlar')}
-            className={`py-1.5 px-3 text-xs font-bold rounded-lg transition-all ${
+            className={`py-1.5 px-3 text-xs font-bold rounded-lg transition-all shrink-0 text-center whitespace-nowrap ${
               activeTab === 'soliqlar' ? 'bg-white dark:bg-slate-900 text-sky-600 dark:text-sky-400 shadow-sm' : 'text-slate-600 dark:text-slate-400'
             }`}
           >
@@ -164,7 +164,7 @@ const HomeServicesPage = () => {
           </button>
           <button
             onClick={() => setActiveTab('boshqa')}
-            className={`py-1.5 px-3 text-xs font-bold rounded-lg transition-all ${
+            className={`py-1.5 px-3 text-xs font-bold rounded-lg transition-all shrink-0 text-center whitespace-nowrap ${
               activeTab === 'boshqa' ? 'bg-white dark:bg-slate-900 text-sky-600 dark:text-sky-400 shadow-sm' : 'text-slate-600 dark:text-slate-400'
             }`}
           >

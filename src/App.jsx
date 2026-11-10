@@ -45,10 +45,10 @@ const MainLayout = () => {
         <AuthGate />
       ) : (
         /* Ro'yxatdan o'tgandan so'ng barcha shaxsiy ma'lumotlar, profilingiz va xizmatlar ochiladi */
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-5 pb-24 lg:pb-10">
+        <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 py-4 sm:py-6 pb-28 lg:pb-10">
           <div className="flex flex-col lg:flex-row gap-5">
             
-            {/* Left Sidebar */}
+            {/* Left Sidebar (Desktop) */}
             <Sidebar />
 
             {/* Page Dynamic Content */}
@@ -68,69 +68,85 @@ const MainLayout = () => {
 
       {/* Mobile Bottom Quick Navigation (Faqat ro'yxatdan o'tgach ko'rinadi) */}
       {isAuthenticated && (
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 z-30 p-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800">
-        <div className="mx-auto max-w-md px-2 flex items-center justify-around">
-          <button
-            onClick={() => setActivePage('dashboard')}
-            className={`p-1.5 rounded-lg flex flex-col items-center gap-0.5 text-[10px] ${
-              activePage === 'dashboard' ? 'text-sky-600 dark:text-sky-400 font-bold' : 'text-slate-500'
-            }`}
-          >
-            <LayoutDashboard className="w-5 h-5" />
-            <span>Hamyon</span>
-          </button>
+        <nav 
+          aria-label="Mobil menyu"
+          className="lg:hidden fixed bottom-0 left-0 right-0 z-40 px-2 py-1.5 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 shadow-xl"
+          style={{ paddingBottom: 'max(0.375rem, env(safe-area-inset-bottom))' }}
+        >
+          <div className="mx-auto max-w-md flex items-center justify-between gap-1">
+            <button
+              onClick={() => setActivePage('dashboard')}
+              className={`flex-1 py-1 px-1 rounded-xl flex flex-col items-center gap-0.5 text-[10px] transition-all ${
+                activePage === 'dashboard' 
+                  ? 'text-sky-600 dark:text-sky-400 font-black bg-sky-50 dark:bg-sky-950/70' 
+                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
+            >
+              <LayoutDashboard className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="truncate">Hamyon</span>
+            </button>
 
-          <button
-            onClick={() => setActivePage('home')}
-            className={`p-1.5 rounded-lg flex flex-col items-center gap-0.5 text-[10px] ${
-              activePage === 'home' ? 'text-sky-600 dark:text-sky-400 font-bold' : 'text-slate-500'
-            }`}
-          >
-            <Home className="w-5 h-5" />
-            <span>Uyim</span>
-          </button>
+            <button
+              onClick={() => setActivePage('home')}
+              className={`flex-1 py-1 px-1 rounded-xl flex flex-col items-center gap-0.5 text-[10px] transition-all ${
+                activePage === 'home' 
+                  ? 'text-sky-600 dark:text-sky-400 font-black bg-sky-50 dark:bg-sky-950/70' 
+                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
+            >
+              <Home className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="truncate">Uyim</span>
+            </button>
 
-          <button
-            onClick={() => setActivePage('car')}
-            className={`p-1.5 rounded-lg flex flex-col items-center gap-0.5 text-[10px] ${
-              activePage === 'car' ? 'text-sky-600 dark:text-sky-400 font-bold' : 'text-slate-500'
-            }`}
-          >
-            <Car className="w-5 h-5" />
-            <span>Avto</span>
-          </button>
+            <button
+              onClick={() => setActivePage('car')}
+              className={`flex-1 py-1 px-1 rounded-xl flex flex-col items-center gap-0.5 text-[10px] transition-all ${
+                activePage === 'car' 
+                  ? 'text-sky-600 dark:text-sky-400 font-black bg-sky-50 dark:bg-sky-950/70' 
+                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
+            >
+              <Car className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="truncate">Avto</span>
+            </button>
 
-          <button
-            onClick={() => setActivePage('family')}
-            className={`p-1.5 rounded-lg flex flex-col items-center gap-0.5 text-[10px] ${
-              activePage === 'family' ? 'text-sky-600 dark:text-sky-400 font-bold' : 'text-slate-500'
-            }`}
-          >
-            <Users className="w-5 h-5" />
-            <span>Oilam</span>
-          </button>
+            <button
+              onClick={() => setActivePage('family')}
+              className={`flex-1 py-1 px-1 rounded-xl flex flex-col items-center gap-0.5 text-[10px] transition-all ${
+                activePage === 'family' 
+                  ? 'text-sky-600 dark:text-sky-400 font-black bg-sky-50 dark:bg-sky-950/70' 
+                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
+            >
+              <Users className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="truncate">Oilam</span>
+            </button>
 
-          <button
-            onClick={() => setActivePage('business')}
-            className={`p-1.5 rounded-lg flex flex-col items-center gap-0.5 text-[10px] ${
-              activePage === 'business' ? 'text-sky-600 dark:text-sky-400 font-bold' : 'text-slate-500'
-            }`}
-          >
-            <SunMedium className="w-5 h-5" />
-            <span>Biznes</span>
-          </button>
+            <button
+              onClick={() => setActivePage('business')}
+              className={`flex-1 py-1 px-1 rounded-xl flex flex-col items-center gap-0.5 text-[10px] transition-all ${
+                activePage === 'business' 
+                  ? 'text-sky-600 dark:text-sky-400 font-black bg-sky-50 dark:bg-sky-950/70' 
+                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
+            >
+              <SunMedium className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="truncate">Biznes</span>
+            </button>
 
-          <button
-            onClick={() => setActivePage('receipts')}
-            className={`p-1.5 rounded-lg flex flex-col items-center gap-0.5 text-[10px] ${
-              activePage === 'receipts' ? 'text-sky-600 dark:text-sky-400 font-bold' : 'text-slate-500'
-            }`}
-          >
-            <Receipt className="w-5 h-5" />
-            <span>Cheklar</span>
-          </button>
-        </div>
-      </div>
+            <button
+              onClick={() => setActivePage('receipts')}
+              className={`flex-1 py-1 px-1 rounded-xl flex flex-col items-center gap-0.5 text-[10px] transition-all ${
+                activePage === 'receipts' 
+                  ? 'text-sky-600 dark:text-sky-400 font-black bg-sky-50 dark:bg-sky-950/70' 
+                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+              }`}
+            >
+              <Receipt className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="truncate">Cheklar</span>
+            </button>
+          </div>
+        </nav>
       )}
 
       {/* Global Toast Alert Notification */}

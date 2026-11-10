@@ -47,9 +47,9 @@ const DashboardPage = () => {
     <div className="space-y-5 animate-in fade-in duration-200">
       
       {/* Top Banner */}
-      <div className="clean-card p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="clean-card p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="text-[10px] font-bold uppercase tracking-wider text-sky-700 dark:text-sky-300 bg-sky-50 dark:bg-sky-950 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800">
               Shaxsiy Hamyon Tizimi
             </span>
@@ -66,18 +66,18 @@ const DashboardPage = () => {
         </div>
 
         {/* Oylik maoshni qabul qilish tugmasi (Qayta-qayta qabul qilib bo'lmaydi) */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full md:w-auto">
           {user.maoshQabulQilingan ? (
-            <div className="px-3.5 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 flex items-center gap-2 text-xs font-bold text-emerald-700 dark:text-emerald-300">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              <span>Oktabr maoshi qabul qilingan (Keyingi: {user.keyingiMaoshSanasi || '2026-11-05'})</span>
+            <div className="w-full md:w-auto px-3.5 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/70 border border-emerald-200 dark:border-emerald-800 flex items-center gap-2 text-xs font-bold text-emerald-700 dark:text-emerald-300">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span className="truncate">Oktabr maoshi qabul qilingan (Keyingi: {user.keyingiMaoshSanasi || '2026-11-05'})</span>
             </div>
           ) : (
             <button
               onClick={receiveMonthlySalary}
-              className="clean-btn-primary px-4 py-2.5 flex items-center gap-2 text-xs font-bold shadow-sm"
+              className="w-full md:w-auto clean-btn-primary px-4 py-2.5 flex items-center justify-center gap-2 text-xs font-bold shadow-sm"
             >
-              <Briefcase className="w-4 h-4" />
+              <Briefcase className="w-4 h-4 shrink-0" />
               <span>Oylik maoshni qabul qilish ({formatMoney(user.oylikDaromad)})</span>
             </button>
           )}
@@ -245,81 +245,81 @@ const DashboardPage = () => {
           Asosiy Bo'limlar
         </h2>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3">
           
           <div 
             onClick={() => setActivePage('home')}
-            className="clean-card p-4 cursor-pointer hover:border-sky-300 dark:hover:border-sky-700 transition-all group"
+            className="clean-card p-3 sm:p-4 cursor-pointer hover:border-sky-300 dark:hover:border-sky-700 transition-all group"
           >
-            <div className="w-9 h-9 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-2.5">
-              <Home className="w-5 h-5" />
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-amber-50 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-2">
+              <Home className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+            <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white truncate">
               Mening uyim
             </h3>
-            <p className="text-[11px] text-slate-400 mt-0.5">
-              Elektr, gaz, suv, chiqindi, soliqlar
+            <p className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 line-clamp-1">
+              Elektr, gaz, suv, soliqlar
             </p>
-            <div className="mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-sky-600 dark:text-sky-400 font-semibold">
-              <span>{homeServices.uylar?.length || 1} ta ko'chmas mulk</span>
-              <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            <div className="mt-2 sm:mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] sm:text-xs text-sky-600 dark:text-sky-400 font-semibold">
+              <span className="truncate">{homeServices.uylar?.length || 1} ta ko'chmas mulk</span>
+              <ChevronRight className="w-3.5 h-3.5 shrink-0 group-hover:translate-x-0.5 transition-transform" />
             </div>
           </div>
 
           <div 
             onClick={() => setActivePage('car')}
-            className="clean-card p-4 cursor-pointer hover:border-sky-300 dark:hover:border-sky-700 transition-all group"
+            className="clean-card p-3 sm:p-4 cursor-pointer hover:border-sky-300 dark:hover:border-sky-700 transition-all group"
           >
-            <div className="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-2.5">
-              <Car className="w-5 h-5" />
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-2">
+              <Car className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+            <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white truncate">
               Mening avtomobilim
             </h3>
-            <p className="text-[11px] text-slate-400 mt-0.5">
-              Sug'urta, texosmotr, jarimalar
+            <p className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 line-clamp-1">
+              Sug'urta, texosmotr, radar
             </p>
-            <div className="mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-sky-600 dark:text-sky-400 font-semibold">
-              <span>{carServices.avtomobil?.model?.split(' ')[0]} {carServices.avtomobil?.model?.split(' ')[1] || ''} ({carServices.garaj?.length || 1} ta)</span>
-              <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            <div className="mt-2 sm:mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] sm:text-xs text-sky-600 dark:text-sky-400 font-semibold">
+              <span className="truncate">{carServices.avtomobil?.model?.split(' ')[0]} ({carServices.garaj?.length || 1} ta)</span>
+              <ChevronRight className="w-3.5 h-3.5 shrink-0 group-hover:translate-x-0.5 transition-transform" />
             </div>
           </div>
 
           <div 
             onClick={() => setActivePage('family')}
-            className="clean-card p-4 cursor-pointer hover:border-sky-300 dark:hover:border-sky-700 transition-all group"
+            className="clean-card p-3 sm:p-4 cursor-pointer hover:border-sky-300 dark:hover:border-sky-700 transition-all group"
           >
-            <div className="w-9 h-9 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-2.5">
-              <Users className="w-5 h-5" />
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 dark:text-rose-400 flex items-center justify-center mb-2">
+              <Users className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+            <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white truncate">
               Mening oilam
             </h3>
-            <p className="text-[11px] text-slate-400 mt-0.5">
-              4 farzand: maktab, bog'cha, to'garaklar
+            <p className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 line-clamp-1">
+              4 farzand: maktab, to'garak
             </p>
-            <div className="mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-sky-600 dark:text-sky-400 font-semibold">
-              <span>Cheklar bilan</span>
-              <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            <div className="mt-2 sm:mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] sm:text-xs text-sky-600 dark:text-sky-400 font-semibold">
+              <span className="truncate">Cheklar bilan</span>
+              <ChevronRight className="w-3.5 h-3.5 shrink-0 group-hover:translate-x-0.5 transition-transform" />
             </div>
           </div>
 
           <div 
             onClick={() => setActivePage('business')}
-            className="clean-card p-4 cursor-pointer hover:border-sky-300 dark:hover:border-sky-700 transition-all group"
+            className="clean-card p-3 sm:p-4 cursor-pointer hover:border-sky-300 dark:hover:border-sky-700 transition-all group"
           >
-            <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-2.5">
-              <SunMedium className="w-5 h-5" />
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-2">
+              <SunMedium className="w-4 h-4 sm:w-5 sm:h-5" />
             </div>
-            <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">
+            <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white truncate">
               Mening bizneslarim
             </h3>
-            <p className="text-[11px] text-slate-400 mt-0.5">
-              Quyosh paneli & Ijara tushumlari
+            <p className="text-[10px] sm:text-[11px] text-slate-400 mt-0.5 line-clamp-1">
+              Quyosh paneli & Ijara
             </p>
-            <div className="mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs text-sky-600 dark:text-sky-400 font-semibold">
-              <span>1 kVt sotish</span>
-              <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            <div className="mt-2 sm:mt-2.5 pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[11px] sm:text-xs text-sky-600 dark:text-sky-400 font-semibold">
+              <span className="truncate">1 kVt sotish</span>
+              <ChevronRight className="w-3.5 h-3.5 shrink-0 group-hover:translate-x-0.5 transition-transform" />
             </div>
           </div>
 

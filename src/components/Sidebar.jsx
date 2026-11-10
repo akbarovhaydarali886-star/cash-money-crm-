@@ -70,8 +70,8 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="w-full lg:w-72 flex-shrink-0">
-      <div className="clean-card p-4 space-y-4">
+    <aside className="hidden lg:block w-72 flex-shrink-0">
+      <div className="clean-card p-4 space-y-4 sticky top-20">
         
         {/* Salary Status Info Box */}
         <div className="clean-box p-3.5 space-y-2">

@@ -88,8 +88,8 @@ const AddHomeModal = () => {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="w-full max-w-xl bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 relative shadow-xl max-h-[92vh] overflow-y-auto">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
+      <div className="w-full max-w-xl bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 sm:p-6 relative shadow-xl max-h-[92vh] overflow-y-auto">
         
         {/* Close Button */}
         <button
@@ -286,7 +286,7 @@ const AddHomeModal = () => {
             </div>
 
             {/* Actions */}
-            <div className="flex gap-2 pt-2">
+            <div className="flex flex-col sm:flex-row gap-2 pt-2">
               <button
                 type="button"
                 onClick={() => setDetectedHome(null)}
@@ -297,7 +297,7 @@ const AddHomeModal = () => {
               <button
                 type="button"
                 onClick={handleSaveHome}
-                className="flex-1 clean-btn-primary py-2.5 px-4 font-bold text-xs flex items-center justify-center gap-2 shadow-sm"
+                className="w-full sm:flex-1 clean-btn-primary py-2.5 px-4 font-bold text-xs flex items-center justify-center gap-2 shadow-sm"
               >
                 <CheckCircle2 className="w-4 h-4" />
                 <span>Mening uylarimga saqlash</span>

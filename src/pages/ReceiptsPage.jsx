@@ -84,12 +84,12 @@ const ReceiptsPage = () => {
         </div>
 
         {/* Categories */}
-        <div className="flex flex-wrap gap-1.5 w-full md:w-auto">
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1 md:pb-0 w-full md:w-auto">
           {categories.map(cat => (
             <button
               key={cat.id}
               onClick={() => setFilterCategory(cat.id)}
-              className={`py-1.5 px-3 rounded-lg text-xs font-bold transition-all ${
+              className={`py-1.5 px-3 rounded-lg text-xs font-bold transition-all shrink-0 whitespace-nowrap ${
                 filterCategory === cat.id
                   ? 'clean-btn-primary'
                   : 'clean-btn text-slate-600 dark:text-slate-400'

@@ -35,8 +35,8 @@ const CarServicesPage = () => {
     <div className="space-y-5 animate-in fade-in duration-200">
       
       {/* Garage Switcher Row */}
-      <div className="clean-card p-3 sm:p-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0 max-w-full">
+      <div className="clean-card p-3 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1 sm:pb-0 max-w-full">
           <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mr-1 flex items-center gap-1.5 flex-shrink-0">
             <Car className="w-4 h-4 text-sky-600" />
             Mening garajim ({garaj.length}):
@@ -68,7 +68,7 @@ const CarServicesPage = () => {
 
         <button
           onClick={() => setIsAddCarModalOpen(true)}
-          className="clean-btn px-3.5 py-2 flex items-center gap-1.5 text-xs font-bold text-sky-600 dark:text-sky-400 hover:border-sky-500 flex-shrink-0 ml-auto"
+          className="clean-btn px-3.5 py-2 flex items-center justify-center gap-1.5 text-xs font-bold text-sky-600 dark:text-sky-400 hover:border-sky-500 w-full sm:w-auto flex-shrink-0"
         >
           <Plus className="w-4 h-4" />
           <span>+ Yangi avtomobil qo'shish</span>
@@ -128,7 +128,7 @@ const CarServicesPage = () => {
         </div>
 
         {/* Quick Stats */}
-        <div className="flex gap-2.5">
+        <div className="grid grid-cols-2 sm:flex gap-2.5 w-full lg:w-auto">
           <div className="px-3.5 py-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-center">
             <span className="text-[10px] text-slate-400 uppercase font-bold block">Jarimalar</span>
             <span className="text-xs font-black text-rose-600 dark:text-rose-400">
